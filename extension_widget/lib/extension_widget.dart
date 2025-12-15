@@ -16,12 +16,15 @@ extension StyledExtensionWidget on Widget {
         child: this,
       );
 
-  Widget div([DivStyle? style, bool? animate]) => Div(
-        key: key,
+  Widget div([DivStyle? style, bool? animate]) {
+    final String? keyValue = key is ValueKey ? (key as ValueKey).value.toString() : key?.toString();
+    return Div(
+        key: keyValue != null ? ValueKey('${keyValue}_div') : null,
         style: style,
         animate: animate ?? false,
         child: this,
       );
+  }
 
   Widget shouldClip(bool clip, BorderRadius borderRadius) {
     if (clip) {
